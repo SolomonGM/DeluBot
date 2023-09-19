@@ -25,20 +25,30 @@ class DeluBot
         _client.Ready += ReadyAsync; //delegate of readysync method
 
         await _client.LoginAsync(TokenType.Bot, "MTE1MzgxODU5NDU2MDQ0MjQyOA.GshLmN.TVo_3NhZiKunDsgLSF7vqswShv4EVxNAqo79-c"); //login to the discord bot with token OAuth2
+        await _client.StartAsync();
     }
 
     private async Task ReadyAsync()
     {
-        Console.WriteLine(($"{_client.CurrentUser.Username} is connected and ready");
-        Console.WriteLine("Press any key to stop the bot...");
-
-
+        Console.WriteLine($"{_client.CurrentUser.Username} is connected and ready");
+        Console.WriteLine("Press Q key to stop the bot...");
     }
 
     static async Task Main()
     {
         var bot = new DeluBot();
+
         await bot.RunDelu();
+
+        ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+        if (keyInfo.Key != ConsoleKey.Q)
+        {
+            Console.WriteLine("Bot is stopping...");
+            await bot._client.StopAsync();
+            Console.ReadKey();
+        }
+
+        Console.WriteLine("Bot Collapsed");
         Console.ReadKey();
     }
 
