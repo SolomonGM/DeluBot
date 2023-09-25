@@ -1,3 +1,3 @@
 # DeluBot
 
-Btot for general needs.
+Bot for general needs.
